@@ -1,31 +1,34 @@
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const NavigationBar = () => {
+  const router = useRouter();
+
+  const links = [
+    { href: '/', label: 'Home' },
+    { href: '/courses', label: 'Courses' },
+    { href: '/notes', label: 'Notes' },
+    { href: '/instructors', label: 'Instructors' },
+    { href: '/contact', label: 'Contact Us' },
+  ];
+
   return (
     <Navbar expand="lg" bg="dark" variant="dark" className="mb-4" sticky="top">
       <Container>
-        <Link href="/" passHref legacyBehavior>
-          <Navbar.Brand>TorchBearers Academy</Navbar.Brand>
-        </Link>
+        <Link href="/" className="navbar-brand">TorchBearers Academy</Link>
         <Navbar.Toggle aria-controls="navbar-nav" />
         <Navbar.Collapse id="navbar-nav">
           <Nav className="ms-auto">
-            <Link href="/" passHref legacyBehavior>
-              <Nav.Link>Home</Nav.Link>
-            </Link>
-            <Link href="/courses" passHref legacyBehavior>
-              <Nav.Link>Courses</Nav.Link>
-            </Link>
-            <Link href="/notes" passHref legacyBehavior>
-              <Nav.Link>Notes</Nav.Link>
-            </Link>
-            <Link href="/instructors" passHref legacyBehavior>
-              <Nav.Link>Instructors</Nav.Link>
-            </Link>
-            <Link href="/contact" passHref legacyBehavior>
-              <Nav.Link>Contact Us</Nav.Link>
-            </Link>
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`nav-link ${router.pathname === link.href ? 'active' : ''}`}
+              >
+                {link.label}
+              </Link>
+            ))}
           </Nav>
         </Navbar.Collapse>
       </Container>
