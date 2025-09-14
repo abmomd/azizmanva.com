@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 const NavigationBar = () => {
   const router = useRouter();
-  const [expanded, setExpanded] = useState(false); // Track navbar state
+  const [expanded, setExpanded] = useState(false);
 
   const links = [
     { href: '/', label: 'Home' },
@@ -16,22 +16,24 @@ const NavigationBar = () => {
   ];
 
   const handleNavClick = (href) => {
-    setExpanded(false); // Close navbar on mobile
-    router.push(href);  // Navigate to link
+    setExpanded(false);
+    router.push(href);
   };
 
   return (
-    <Navbar 
-      expand="lg" 
-      bg="dark" 
-      variant="dark" 
-      className="mb-4" 
-      sticky="top" 
+    <Navbar
+      expand="lg"
+      bg="light"
+      variant="light"
+      className="shadow-sm"
+      sticky="top"
       expanded={expanded}
     >
-      <Container>
-        <Link href="/" className="navbar-brand" onClick={() => setExpanded(false)}>
-          TorchBearers Academy
+      <Container fluid style={{ padding: '0 20px' }}>
+        <Link href="/" passHref legacyBehavior>
+          <Navbar.Brand onClick={() => setExpanded(false)} style={{ fontWeight: 'bold' }}>
+            TorchBearers Academy
+          </Navbar.Brand>
         </Link>
         <Navbar.Toggle onClick={() => setExpanded(!expanded)} aria-controls="navbar-nav" />
         <Navbar.Collapse id="navbar-nav">
@@ -41,6 +43,10 @@ const NavigationBar = () => {
                 key={link.href}
                 onClick={() => handleNavClick(link.href)}
                 active={router.pathname === link.href}
+                style={{
+                  fontWeight: router.pathname === link.href ? '600' : '400',
+                  color: router.pathname === link.href ? '#007bff' : '#333',
+                }}
               >
                 {link.label}
               </Nav.Link>
