@@ -1,31 +1,50 @@
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 const NavigationBar = () => {
+  const router = useRouter();
+  const [expanded, setExpanded] = useState(false); // Track navbar state
+
+  const links = [
+    { href: '/', label: 'Home' },
+    { href: '/courses', label: 'Courses' },
+    { href: '/notes', label: 'Notes' },
+    { href: '/instructors', label: 'Instructors' },
+    { href: '/contact', label: 'Contact Us' },
+  ];
+
+  const handleNavClick = (href) => {
+    setExpanded(false); // Close navbar on mobile
+    router.push(href);  // Navigate to link
+  };
+
   return (
-    <Navbar expand="lg" bg="dark" variant="dark" className="mb-4" sticky="top">
+    <Navbar 
+      expand="lg" 
+      bg="dark" 
+      variant="dark" 
+      className="mb-4" 
+      sticky="top" 
+      expanded={expanded}
+    >
       <Container>
-        <Link href="/" passHref legacyBehavior>
-          <Navbar.Brand>TorchBearers Academy</Navbar.Brand>
+        <Link href="/" className="navbar-brand" onClick={() => setExpanded(false)}>
+          TorchBearers Academy
         </Link>
-        <Navbar.Toggle aria-controls="navbar-nav" />
+        <Navbar.Toggle onClick={() => setExpanded(!expanded)} aria-controls="navbar-nav" />
         <Navbar.Collapse id="navbar-nav">
           <Nav className="ms-auto">
-            <Link href="/" passHref legacyBehavior>
-              <Nav.Link>Home</Nav.Link>
-            </Link>
-            <Link href="/courses" passHref legacyBehavior>
-              <Nav.Link>Courses</Nav.Link>
-            </Link>
-            <Link href="/notes" passHref legacyBehavior>
-              <Nav.Link>Notes</Nav.Link>
-            </Link>
-            <Link href="/instructors" passHref legacyBehavior>
-              <Nav.Link>Instructors</Nav.Link>
-            </Link>
-            <Link href="/contact" passHref legacyBehavior>
-              <Nav.Link>Contact Us</Nav.Link>
-            </Link>
+            {links.map((link) => (
+              <Nav.Link
+                key={link.href}
+                onClick={() => handleNavClick(link.href)}
+                active={router.pathname === link.href}
+              >
+                {link.label}
+              </Nav.Link>
+            ))}
           </Nav>
         </Navbar.Collapse>
       </Container>
