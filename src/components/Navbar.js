@@ -1,9 +1,11 @@
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 const NavigationBar = () => {
   const router = useRouter();
+  const [expanded, setExpanded] = useState(false); // Track navbar state
 
   const links = [
     { href: '/', label: 'Home' },
@@ -13,21 +15,35 @@ const NavigationBar = () => {
     { href: '/contact', label: 'Contact Us' },
   ];
 
+  const handleNavClick = (href) => {
+    setExpanded(false); // Close navbar on mobile
+    router.push(href);  // Navigate to link
+  };
+
   return (
-    <Navbar expand="lg" bg="dark" variant="dark" className="mb-4" sticky="top">
+    <Navbar 
+      expand="lg" 
+      bg="dark" 
+      variant="dark" 
+      className="mb-4" 
+      sticky="top" 
+      expanded={expanded}
+    >
       <Container>
-        <Link href="/" className="navbar-brand">TorchBearers Academy</Link>
-        <Navbar.Toggle aria-controls="navbar-nav" />
+        <Link href="/" className="navbar-brand" onClick={() => setExpanded(false)}>
+          TorchBearers Academy
+        </Link>
+        <Navbar.Toggle onClick={() => setExpanded(!expanded)} aria-controls="navbar-nav" />
         <Navbar.Collapse id="navbar-nav">
           <Nav className="ms-auto">
             {links.map((link) => (
-              <Link
+              <Nav.Link
                 key={link.href}
-                href={link.href}
-                className={`nav-link ${router.pathname === link.href ? 'active' : ''}`}
+                onClick={() => handleNavClick(link.href)}
+                active={router.pathname === link.href}
               >
                 {link.label}
-              </Link>
+              </Nav.Link>
             ))}
           </Nav>
         </Navbar.Collapse>
