@@ -16,7 +16,7 @@ const Home = () => {
       <div className="text-center text-md-start flex-grow-1 mb-4 mb-md-0">
         <h1 className="mb-3 text-black">Learn for the sake of the future!</h1>
         <p className="lead mb-4 text-muted">
-          Torchbearers Academy is a boutique firm offers 1 on 1 online tutoring. We understand international curriculum because that's what we teach every day.
+          Torchbearers Academy is a boutique firm offers 1 on 1 online tutoring. We understand international curriculum because that is what we teach every day.
         </p>
         <Link href="/courses" passHref legacyBehavior>
           <Button variant="primary" size="lg">Get Started</Button>
