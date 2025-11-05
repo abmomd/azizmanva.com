@@ -16,7 +16,7 @@ const Home = () => {
       <div className="text-center text-md-start flex-grow-1 mb-4 mb-md-0">
         <h1 className="mb-3 text-black">Learn for the sake of the future!</h1>
         <p className="lead mb-4 text-muted">
-          Learn new skills from the comfort of your home or anywhere anytime.
+          Torchbearers Academy is a boutique firm offers 1 on 1 online tutoring. We understand international curriculum because that is what we teach every day.
         </p>
         <Link href="/courses" passHref legacyBehavior>
           <Button variant="primary" size="lg">Get Started</Button>
@@ -39,10 +39,10 @@ const Home = () => {
               <h6>📚 Online Tutoring</h6>
             </Col>
             <Col>
-              <h6>🔒 Lifetime Access</h6>
+              <h6>🧑‍🏫 Experienced Teachers</h6>
             </Col>
             <Col>
-              <h6>⚡ Active Learning</h6>
+              <h6>⚡ Great Results</h6>
             </Col>
             <Col>
               <h6>🎓 Personal Tutoring</h6>
