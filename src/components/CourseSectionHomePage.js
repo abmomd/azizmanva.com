@@ -5,12 +5,12 @@ import Link from 'next/link';
 const CoursesSection = () => {
   const courses = [
     {
-      title: 'Python Programming',
+      title: 'International Math and Physics: IBDP, IGCSE, AP',
       description: 'Learn Python from basics to advanced projects with hands-on exercises.',
       link: '/courses/python'
     },
     {
-      title: 'Mathematics',
+      title: 'Competitive Math and Physics',
       description: 'Master competitive and school-level mathematics with guided lessons.',
       link: '/courses/maths'
     },
