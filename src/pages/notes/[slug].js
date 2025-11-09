@@ -4,6 +4,7 @@ import notesData from "@/data/notesData";
 import Layout from "@/components/Layout";
 import Link from "next/link";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ContactSection from "@/components/ContactSection";
 
 export default function NotePage() {
   const router = useRouter();
@@ -13,10 +14,7 @@ export default function NotePage() {
   if (!note)
     return (
       <Layout title="Note Not Found">
-        <div
-          className="min-vh-100 d-flex flex-column justify-content-center align-items-center text-light"
-          style={{ backgroundColor: "#0d1117" }}
-        >
+        <div className="min-vh-100 d-flex flex-column justify-content-center align-items-center text-light bg-dark">
           <h1 className="display-5 fw-bold text-danger mb-3">❌ Note Not Found</h1>
           <p className="text-secondary mb-4">The requested note does not exist.</p>
           <Link href="/notes" className="text-decoration-none text-primary">
@@ -34,15 +32,13 @@ export default function NotePage() {
         <meta name="keywords" content={note.keywords.join(", ")} />
       </Head>
 
-      <div
-        className="min-vh-100 py-5 text-light"
-        style={{ backgroundColor: "#0d1117" }}
-      >
+      {/* Middle Section */}
+      <div className="min-vh-100 py-5 text-light" style={{ backgroundColor: "#0d1117" }}>
         <div className="container text-center">
           {/* Section Header */}
-          {/* <p className="text-  fw-semibold mb-2">
-            {note.category}
-          </p> */}
+          <p className="text-uppercase text-primary fw-semibold mb-2">
+            Section: {note.category}
+          </p>
 
           {/* Note Title */}
           <h1 className="display-5 fw-bold text-white mb-3">{note.title}</h1>
@@ -50,7 +46,8 @@ export default function NotePage() {
           {/* Description */}
           <div className="col-lg-8 mx-auto">
             <p className="text-secondary mb-4 fs-5">
-              {note.description || "Explore detailed notes for this topic. Download or preview below."}
+              {note.description ||
+                "Explore detailed notes for this topic. Download or preview below."}
             </p>
           </div>
 
@@ -94,6 +91,9 @@ export default function NotePage() {
           </div>
         </div>
       </div>
+
+      {/* Contact Section */}
+      <ContactSection />
     </Layout>
   );
 }
