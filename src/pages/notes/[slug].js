@@ -6,6 +6,8 @@ import Link from "next/link";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ContactSection from "@/components/ContactSection";
 
+const SITE_URL = "https://azizmanva-com-preview.vercel.app"; // 🔁 change if you’re on another domain / preview
+
 export default function NotePage() {
   const router = useRouter();
   const { slug } = router.query;
@@ -24,16 +26,63 @@ export default function NotePage() {
       </Layout>
     );
 
+  // 🔹 SEO fields (coming from notesData, with fallbacks)
+  const pageTitle =
+    note.metaTitle || `${note.title} | Math & Science Notes | Aziz Manva`;
+  const pageDescription = note.metaDescription || note.description;
+  const canonicalPath = note.canonicalPath || `/notes/${note.slug}`;
+  const canonicalUrl = `${SITE_URL}${canonicalPath}`;
+  const ogImage = `${SITE_URL}/images/notes-og-default.png`; // TODO: replace with real image or remove if not available
+
   return (
-    <Layout title={note.title} description={note.description}>
+    <Layout title={pageTitle} description={pageDescription}>
       <Head>
-        <title>{note.title}</title>
-        <meta name="description" content={note.description} />
-        <meta name="keywords" content={note.keywords.join(", ")} />
+        <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: note.title,
+          description: note.description,
+          url: `${SITE_URL}${note.canonicalPath || `/notes/${note.slug}`}`,
+          inLanguage: "en",
+          author: { "@type": "Person", name: "Aziz Manva" },
+          about: note.keywords,
+            }),
+          }}
+         />
+
+        {/* Basic SEO */}
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        {note.keywords && note.keywords.length > 0 && (
+          <meta name="keywords" content={note.keywords.join(", ")} />
+        )}
+
+        {/* Canonical */}
+        <link rel="canonical" href={canonicalUrl} />
+
+        {/* Open Graph */}
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={canonicalUrl} />
+        {/* comment this in if/when you have an image */}
+        {/* <meta property="og:image" content={ogImage} /> */}
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDescription} />
+        {/* <meta name="twitter:image" content={ogImage} /> */}
       </Head>
 
       {/* Middle Section */}
-      <div className="min-vh-100 py-5 text-light" style={{ backgroundColor: "#0d1117" }}>
+      <div
+        className="min-vh-100 py-5 text-light"
+        style={{ backgroundColor: "#0d1117" }}
+      >
         <div className="container text-center">
           {/* Section Header */}
           <p className="text-uppercase text-primary fw-semibold mb-2">

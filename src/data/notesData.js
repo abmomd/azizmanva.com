@@ -573,19 +573,29 @@ const rawNotesData = {
   ]
 };
 
-// Flatten all categories into one array with SEO-friendly slugs
+// Flatten all categories into one array with SEO-friendly fields
 const notesData = Object.entries(rawNotesData).flatMap(([category, notes]) =>
-  notes.map((note) => ({
-    id: `${category}-${note.name}`,
-    title: note.name,
-    category,
-    description:
+  notes.map((note) => {
+    const slug = slugify(`${category}-${note.name}`, { lower: true, strict: true });
+    const description =
       note.description ||
-      `${note.name} notes from ${category} category — download or view online.`,
-    slug: slugify(`${category}-${note.name}`, { lower: true, strict: true }),
-    pdfUrl: note.path.replace("public", ""), // if you serve from /pdfs/... under public
-    keywords: note.keywords || []
-  }))
+      `${note.name} notes from ${category} category — download or view online.`;
+
+    return {
+      id: `${category}-${note.name}`,
+      title: note.name,
+      category,
+      description,
+      slug,
+      pdfUrl: note.path, // served from /pdfs/... under public
+      keywords: note.keywords || [],
+
+      // 🔽 Extra SEO helpers for [slug].js
+      metaTitle: `${note.name} | Math & Science Notes | Aziz Manva`,
+      metaDescription: description,
+      canonicalPath: `/notes/${slug}`, // you’ll prefix domain in the page
+    };
+  })
 );
 
 export default notesData;

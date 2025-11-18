@@ -1,3 +1,4 @@
 User-agent: *
-Allow: /pdfs/
-Sitemap: https://yourdomain.com/sitemap.xml
+Allow: /
+
+Sitemap: https://azizmanva-com-preview.vercel.app/sitemap.xml
