@@ -16,7 +16,7 @@ const Contact = () => {
             <div className="mb-4">
               <FiMail size={28} className="mb-2" />
               <h5>Email</h5>
-              <p>aziz@azizmanva.com</p>
+              <p>azizmanva@gmail.com</p>
             </div>
 
             <div className="mb-4">
