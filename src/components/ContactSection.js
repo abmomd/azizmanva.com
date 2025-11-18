@@ -93,7 +93,7 @@ const ContactSection = () => {
                     href="mailto:hello@azizmanva.com"
                     className="text-decoration-none text-light"
                   >
-                    aziz@azizmanva.com
+                    azizmanva@gmail.com
                   </a>
                 </li>
 
