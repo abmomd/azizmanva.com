@@ -5,7 +5,7 @@ module.exports = {
   changefreq: 'weekly',
   priority: 0.7,
   additionalPaths: async (config) => {
-    const { default: notesData } = await import('./data/notesData');
+    const { default: notesData } = await import('./src/data/notesData.js');
     return notesData.map((note) => ({
       loc: `/notes/${note.slug}`,
       changefreq: 'monthly',

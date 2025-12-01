@@ -1,4 +1,4 @@
-import Layout from '@/components/Layout';
+import Layout from '../../components/Layout';
 import { Card, Row, Col, Container } from 'react-bootstrap';
 import instructorsData from '../../data/instructorsData';
 import '@fortawesome/fontawesome-free/css/all.min.css';
